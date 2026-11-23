@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Соберите основу своего первого AI-агента за несколько минут.">
+  <title>Конструктор AI-агента</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#builder">Перейти к конструктору</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="К началу страницы">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <span>Конструктор агента</span>
+    </a>
+    <span class="author">Инструмент · Александр Гасс</span>
+  </header>
+
+  <main id="top">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-copy">
+        <h1 id="page-title">Спроектируйте своего первого AI-агента</h1>
+        <p>Выберите, что агент будет делать в вашем бизнесе. Через 3–5 минут вы получите готовую стартовую инструкцию и примеры первых задач.</p>
+        <div class="intro-actions">
+          <a class="button button-primary" href="#builder">Собрать агента</a>
+          <span class="time-note">Бесплатно · без регистрации</span>
+        </div>
+      </div>
+      <div class="route-preview" aria-label="Шесть шагов конструктора">
+        <div class="route-head">
+          <span>Маршрут сборки</span>
+          <strong>6 шагов</strong>
+        </div>
+        <ol>
+          <li><span>1</span> Роль агента</li>
+          <li><span>2</span> Рабочие задачи</li>
+          <li><span>3</span> Контекст проекта</li>
+          <li><span>4</span> Среда работы</li>
+          <li><span>5</span> Безопасные границы</li>
+          <li><span>6</span> Формат результата</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="builder" class="builder" aria-label="Конструктор агента">
+      <nav id="step-nav" class="step-nav" aria-label="Шаги конструктора"></nav>
+      <div id="step-content" class="step-content" aria-live="polite"></div>
+    </section>
+
+    <section id="result" class="result" hidden aria-live="polite"></section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <footer>
+    <span>Ваши ответы остаются только в этом браузере.</span>
+    <a href="https://t.me/m/T-E7DyClNGYy" target="_blank" rel="noopener noreferrer">Обсудить своего агента</a>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
