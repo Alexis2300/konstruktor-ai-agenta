@@ -1,5 +1,5 @@
 export const CONSULTATION_URL = 'https://t.me/m/T-E7DyClNGYy';
-export const SALES_SERVICE_URL = 'https://noya-ai.ru/app/login?s=Q8XKC35X';
+export const VK_URL = 'https://vk.ru/alexgass';
 
 export const ROLES = [
   {
@@ -211,7 +211,6 @@ export function buildResult(state) {
     setup,
     all,
     instructionFilename: platform.filename,
-    showSalesServiceCta: role.id === 'sales',
   };
 }
 
@@ -586,18 +585,11 @@ export function renderResult() {
         <article class="next-card">
           <h3>Хотите разобрать агента под свой проект?</h3>
           <p>На консультации можно уточнить задачи, материалы и подходящий способ запуска.</p>
-          <a class="button button-primary" href="${CONSULTATION_URL}" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
+          <div class="contact-actions">
+            <a class="button button-primary" href="${CONSULTATION_URL}" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
+            <a class="button button-secondary" href="${VK_URL}" target="_blank" rel="noopener noreferrer">Написать ВКонтакте</a>
+          </div>
         </article>
-        ${bundle.showSalesServiceCta ? `<article class="next-card">
-          <h3>Нужен полноценный нейропродавец?</h3>
-          <p>В проверенном внешнем сервисе можно собрать диалоги, клиентскую базу, CRM и воронку в одном месте.</p>
-          <a class="button button-secondary" href="${SALES_SERVICE_URL}" target="_blank" rel="noopener noreferrer">Перейти в сервис</a>
-          <span class="external-note">Откроется внешний сервис в новой вкладке.</span>
-        </article>` : `<article class="next-card">
-          <h3>Попробуйте на реальной задаче</h3>
-          <p>Передайте агенту материалы проекта и начните с одной из подготовленных команд.</p>
-          <button class="button button-secondary" type="button" data-tab-jump="commands">Открыть первые команды</button>
-        </article>`}
       </div>
       <div class="result-footer-actions">
         <button class="button button-ghost" type="button" data-action="edit">Изменить настройки</button>

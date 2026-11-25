@@ -28,10 +28,30 @@ test('defines_exactly_six_roles', async () => {
   }
 });
 
-test('uses_exact_external_links', async () => {
-  const source = `${await read('index.html')}\n${await read('app.js')}`;
-  assert.match(source, /https:\/\/t\.me\/m\/T-E7DyClNGYy/);
-  assert.match(source, /https:\/\/noya-ai\.ru\/app\/login\?s=Q8XKC35X/);
+test('renders Telegram and VK consultation buttons without the sales-service card', async () => {
+  const { renderResult } = await loadApp();
+  const builder = { hidden: false };
+  const result = { hidden: true, innerHTML: '', scrollIntoView() {} };
+  const previousDocument = globalThis.document;
+  globalThis.document = {
+    querySelector(selector) {
+      if (selector === '#builder') return builder;
+      if (selector === '#result') return result;
+      throw new Error(`Неожиданный селектор: ${selector}`);
+    },
+  };
+
+  try {
+    renderResult();
+  } finally {
+    if (previousDocument === undefined) delete globalThis.document;
+    else globalThis.document = previousDocument;
+  }
+
+  assert.match(result.innerHTML, /href="https:\/\/t\.me\/m\/T-E7DyClNGYy"[^>]*>Написать в Telegram<\/a>/);
+  assert.match(result.innerHTML, /href="https:\/\/vk\.ru\/alexgass"[^>]*>Написать ВКонтакте<\/a>/);
+  assert.doesNotMatch(result.innerHTML, /noya-ai|Нужен полноценный нейропродавец|Перейти в сервис/i);
+  assert.equal((result.innerHTML.match(/<article\b/g) ?? []).length, 1);
 });
 
 test('keeps_brand_name_uninflected', async () => {
@@ -88,14 +108,6 @@ test('builds_chat_bundle', async () => {
   assert.equal(result.instructionFilename, 'AI-CHAT-INSTRUCTION.md');
   assert.match(result.instruction, /единая инструкция|скопируйте/i);
   assert.doesNotMatch(result.setup, /создайте.*SKILL\.md/i);
-});
-
-test('shows_sales_service_only_for_sales_role', async () => {
-  const { createInitialState, buildResult } = await loadApp();
-  const sales = completedState(createInitialState());
-  const content = { ...sales, roleId: 'content' };
-  assert.equal(buildResult(sales).showSalesServiceCta, true);
-  assert.equal(buildResult(content).showSalesServiceCta, false);
 });
 
 test('does_not_invent_missing_optional_context', async () => {
